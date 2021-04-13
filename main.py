@@ -34,29 +34,27 @@ with open('recipes.txt') as f:
 
 # print(cookbook)
 
-# get_shop_list_by_dishes(['Омлет', 'Фахитос'], 2)
-for dish in cookbook:
-    name_list = list()
-    # quant_list = list()
-    measure_list = list()
-    person = 2
-    name_dict = {
-        # ingrid['ingredient_name'] : inn_dict
-    }
-    inn_dict = {
-        # {'measure' : ingrid['measure'], 'quantity': int(ingrid['quantity']}
-    }
-    if dish in ['Омлет', 'Фахитос']:
-        for ingrid in cookbook[dish]:
-            if ingrid['ingredient_name'] not in name_dict:
-                inn_dict = {'measure': ingrid['measure'], 'quantity': int(ingrid['quantity'])}
 
-            else:
-                print('yes!', 'опять ', ingrid['ingredient_name'])
-                inn_dict = {'measure': ingrid['measure'], 'quantity': int(ingrid['quantity']) * person}
-            name_dict[ingrid['ingredient_name']] = inn_dict
-        # print(inn_dict)
-        print(name_dict)
+def get_shop_list_by_dishes(dishes, person_count):
+    for dish in cookbook:
+        name_dict = {
+            # ingrid['ingredient_name'] : inn_dict
+        }
+        inn_dict = {
+            # {'measure' : ingrid['measure'], 'quantity': int(ingrid['quantity']}
+        }
+        if dish in dishes:
+            for ingrid in cookbook[dish]:
+                if ingrid['ingredient_name'] not in name_dict:
+                    inn_dict = {'measure': ingrid['measure'], 'quantity': int(ingrid['quantity'])}
 
-        # name_dict[ingrid['ingredient_name']] = inn_dict
+                else:
+                    print('yes!', 'опять ', ingrid['ingredient_name'])
+                    inn_dict = {'measure': ingrid['measure'], 'quantity': int(ingrid['quantity']) * person_count}
+                name_dict[ingrid['ingredient_name']] = inn_dict
+            # print(inn_dict)
+            # print(name_dict)
+    return name_dict
 
+
+print(get_shop_list_by_dishes(['Омлет', 'Фахитос'], 2))
