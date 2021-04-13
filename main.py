@@ -31,45 +31,42 @@ with open('recipes.txt') as f:
             ing_list.append(ing_dict)
         f.readline()
         cookbook[dish_name] = ing_list
-# print(cookbook)
-# print()
-# for dish in cookbook:
-#     # print(dish, cookbook[dish])
-#     for ingrid in cookbook[dish]:
-#         print(ingrid['ingredient_name'])
+
+print(cookbook)
 
 # get_shop_list_by_dishes(['Омлет', 'Фахитос'], 2)
-
+name_set = set()
 for dish in cookbook:
     if dish in ['Омлет', 'Фахитос']:
-        # print('dish:', dish)
-        # print('cookbook[dish]:', cookbook[dish])
-        name_dict = {}
-        name_set = set()
+        person = 2
+        name_dict = {
+            # ingrid['ingredient_name'] : inn_dict
+        }
+        inn_dict = {
+            # {'measure' : ingrid['measure'], 'quantity': int(ingrid['quantity']}
+        }
         name_list = list()
         quant_list = list()
         measure_list = list()
         for ingrid in cookbook[dish]:
-            if ingrid['ingredient_name'] in name_set:
-                print('yes!')
-            else:
+            # if ingrid['ingredient_name'] not in name_set:
+            #     name_list.append(ingrid['ingredient_name'])
+            #     inn_dict = {'measure': ingrid['measure'], 'quantity': int(ingrid['quantity'])}
+            #
+            # else:
+            #     print('yes!', 'опять ', ingrid['ingredient_name'])
+            #     inn_dict = {'measure': ingrid['measure'], 'quantity': int(ingrid['quantity']) * person}
+            #     print(name_dict)
+            # name_dict[ingrid['ingredient_name']] = inn_dict
+            if ingrid['ingredient_name'] not in name_dict:
                 name_list.append(ingrid['ingredient_name'])
-                quant_list.append(int(ingrid['quantity']))
-                # print(name_list, quant_list)
-                # inn = set(name_list)
-            # print("ingrid['ingredient_name']:", name_list, quant_list)
+                inn_dict = {'measure': ingrid['measure'], 'quantity': int(ingrid['quantity'])}
 
+            else:
+                print('yes!', 'опять ', ingrid['ingredient_name'])
+                inn_dict = {'measure': ingrid['measure'], 'quantity': int(ingrid['quantity']) * person}
+                print(name_dict)
+        name_dict[ingrid['ingredient_name']] = inn_dict
 
-        print('set', name_set)
-
-
-# words = ['hello', 'daddy', 'hello', 'mum']
-# a = set(words)
-#
-# words2 = ['hello', 'hello', 'bye', 'mum']
-# b = set(words2)
-# if 'mum' in b:
-#     print('yes')
-# else:
-#     b.update('mum')
-# print(b)
+        name_set |= set(name_list)
+    print(name_dict)
