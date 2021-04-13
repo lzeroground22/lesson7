@@ -1,11 +1,6 @@
 def cooking(recipes):
     cookbook = {
-        # Название блюда: [{
-        #    'ingredient_name': 'имя',
-        #    'quantity': число,
-        #    'measure': 'единицы_измерения'
-        # }]
-        # пустая строка
+        # Название блюда: [{'ingredient_name': 'имя', 'quantity': число, 'measure': 'единицы_измерения'}]
     }
     with open(recipes) as f:
         for lin in f:
@@ -24,20 +19,15 @@ def cooking(recipes):
 
 def get_shop_list_by_dishes(dishes, person_count):
     cookbook2 = cooking('recipes.txt')
+    name_dict = {
+        # ingrid['ingredient_name']: inn_dict{'measure' : ingrid['measure'], 'quantity': int(ingrid['quantity']}
+    }
     for dish in cookbook2:
-        name_dict = {
-            # ingrid['ingredient_name'] : inn_dict
-        }
-        inn_dict = {
-            # {'measure' : ingrid['measure'], 'quantity': int(ingrid['quantity']}
-        }
         if dish in dishes:
             for ingrid in cookbook2[dish]:
                 if ingrid['ingredient_name'] not in name_dict:
                     inn_dict = {'measure': ingrid['measure'], 'quantity': int(ingrid['quantity'])}
-
                 else:
-                    print('yes!', 'опять ', ingrid['ingredient_name'])
                     inn_dict = {'measure': ingrid['measure'], 'quantity': int(ingrid['quantity']) * person_count}
                 name_dict[ingrid['ingredient_name']] = inn_dict
             # print(inn_dict)
@@ -47,4 +37,4 @@ def get_shop_list_by_dishes(dishes, person_count):
 
 if __name__ == '__main__':
     # print(cooking('recipes.txt'))
-    print(get_shop_list_by_dishes(['Омлет', 'Фахитос'], 2))
+    print(get_shop_list_by_dishes(['Фахитос', 'Омлет'], 2))
